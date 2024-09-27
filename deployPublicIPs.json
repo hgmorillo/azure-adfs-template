@@ -23,11 +23,11 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[parameters('publicIpName')]",
       "location": "[parameters('location')]",
-      "properties":{
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {
         "publicIPAllocationMethod": "[parameters('publicIPAddressType')]",
-        "sku": {
-          "name": "Standard"
-        },
         "publicIPAddressVersion": "IPv4"
       }
     }

@@ -10,7 +10,7 @@
     }
   },
   "variables": {
-    "availabilitySetSku": "Standard"
+    "availabilitySetSku": "Aligned"
   },
   "resources": [
     {
@@ -27,8 +27,7 @@
         "platformUpdateDomainCount": 5
       },
       "sku": {
-        "name": "[variables('availabilitySetSku')]",
-        "tier": "Standard"
+        "name": "[variables('availabilitySetSku')]"
       }
     }
   ]
