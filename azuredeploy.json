@@ -194,7 +194,7 @@
   },
   "variables": {
     "baseUrl": "https://raw.githubusercontent.com/hgmorillo/azure-adfs-template/refs/heads/main/",
-    "storageAccountNamePrefix": "[concat(uniquestring(parameters('resourceGroupName')),'sa')]",
+    "storageAccountNamePrefix": "sa",
     "deployStorageAccountsUrl": "[concat(variables('baseUrl'),'/deployStorageAccounts.json')]",
     "deployPublicIPsUrl": "[concat(variables('baseUrl'),'/deployPublicIPs.json')]",
     "publicIpName": "wapLbPip",
