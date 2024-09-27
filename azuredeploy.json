@@ -353,9 +353,6 @@
           },
           "subnets": {
             "value": "[variables('subnets')]"
-          },
-          "resourceGroupName": {
-            "value": "[parameters('virtualNetworkResourceGroupName')]"
           }
         }
       }
@@ -499,9 +496,6 @@
           },
           "vmCount": {
             "value": 2
-          },
-          "storageAccountNamePrefix": {
-            "value": "[variables('storageAccountNamePrefix')]"
           }
         }
       }
@@ -540,9 +534,6 @@
           },
           "vmCount": {
             "value": 2
-          },
-          "storageAccountNamePrefix": {
-            "value": "[variables('storageAccountNamePrefix')]"
           }
         }
       }
@@ -581,9 +572,6 @@
           },
           "vmCount": {
             "value": 2
-          },
-          "storageAccountNamePrefix": {
-            "value": "[variables('storageAccountNamePrefix')]"
           }
         }
       }
