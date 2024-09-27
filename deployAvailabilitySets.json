@@ -10,7 +10,7 @@
     }
   },
   "variables": {
-    "availabilitySetSku": "Aligned"
+    "availabilitySetSku": "Standard"
   },
   "resources": [
     {
@@ -28,7 +28,7 @@
       },
       "sku": {
         "name": "[variables('availabilitySetSku')]",
-        "tier": "Aligned"
+        "tier": "Standard"
       }
     }
   ]
