@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "location": {
@@ -9,17 +9,27 @@
       "type": "array"
     }
   },
+  "variables": {
+    "availabilitySetSku": "Aligned"
+  },
   "resources": [
     {
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[parameters('availabilitySetNames')[copyIndex()]]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-07-01",
       "location": "[parameters('location')]",
       "copy": {
-        "name":"avsetCopy",
-        "count": 3
+        "name": "avsetCopy",
+        "count": "[length(parameters('availabilitySetNames'))]"
       },
-      "properties": {}
+      "properties": {
+        "platformFaultDomainCount": 2,
+        "platformUpdateDomainCount": 5
+      },
+      "sku": {
+        "name": "[variables('availabilitySetSku')]",
+        "tier": "Aligned"
+      }
     }
   ]
 }

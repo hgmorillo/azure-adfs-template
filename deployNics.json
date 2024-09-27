@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "location": {
@@ -30,7 +30,7 @@
       "name": "[parameters('nicNames')[0]]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-05-01",
       "properties": {
         "ipConfigurations": [
           {
@@ -51,7 +51,7 @@
       "name": "[parameters('nicNames')[1]]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-05-01",
       "properties": {
         "ipConfigurations": [
           {
@@ -72,7 +72,7 @@
       "name": "[parameters('nicNames')[2]]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-05-01",
       "properties": {
         "ipConfigurations": [
           {
@@ -85,7 +85,7 @@
               },
               "loadBalancerBackendAddressPools": [
                 {
-                  "id": "[parameters('adfsBEAddressPoolID')]"
+                  "id": "[parameters('adfsBeAddressPoolID')]"
                 }
               ]
             }
@@ -98,7 +98,7 @@
       "name": "[parameters('nicNames')[3]]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-05-01",
       "properties": {
         "ipConfigurations": [
           {
@@ -111,7 +111,7 @@
               },
               "loadBalancerBackendAddressPools": [
                 {
-                  "id": "[parameters('adfsBEAddressPoolID')]"
+                  "id": "[parameters('adfsBeAddressPoolID')]"
                 }
               ]
             }
@@ -124,7 +124,7 @@
       "name": "[parameters('nicNames')[4]]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-05-01",
       "properties": {
         "ipConfigurations": [
           {
@@ -137,7 +137,7 @@
               },
               "loadBalancerBackendAddressPools": [
                 {
-                  "id": "[parameters('wapBEAddressPoolID')]"
+                  "id": "[parameters('wapBeAddressPoolID')]"
                 }
               ],
               "loadBalancerInboundNatRules": [
@@ -155,7 +155,7 @@
       "name": "[parameters('nicNames')[5]]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-05-01",
       "properties": {
         "ipConfigurations": [
           {
@@ -168,7 +168,7 @@
               },
               "loadBalancerBackendAddressPools": [
                 {
-                  "id": "[parameters('wapBEAddressPoolID')]"
+                  "id": "[parameters('wapBeAddressPoolID')]"
                 }
               ],
               "loadBalancerInboundNatRules": [
@@ -184,7 +184,7 @@
   ],
   "outputs": {
     "fqdn": {
-      "value": "[parameters('adfsBEAddressPoolID')]",
+      "value": "[parameters('adfsBeAddressPoolID')]",
       "type": "string"
     }
   }

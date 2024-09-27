@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#", 
   "contentVersion": "1.0.0.0",
   "parameters": {
     "location": {
@@ -16,7 +16,10 @@
       "allowedValues": [
         "Premium_LRS",
         "Standard_LRS",
-        "Standard_GRS"
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Standard_ZRS",
+        "Premium_ZRS"
       ],
       "metadata": {
         "Description": "The type of the Storage Account created"
@@ -28,28 +31,40 @@
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[concat(parameters('storageAccountNamePrefix'),'1')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-09-01",
       "location": "[parameters('location')]",
+      "sku": {
+        "name": "[parameters('storageAccountType')]"
+      },
+      "kind": "StorageV2",
       "properties": {
-        "accountType": "[parameters('storageAccountType')]"
+        "supportsHttpsTrafficOnly": true
       }
     },
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[concat(parameters('storageAccountNamePrefix'),'2')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-09-01",
       "location": "[parameters('location')]",
+      "sku": {
+        "name": "[parameters('storageAccountType')]"
+      },
+      "kind": "StorageV2",
       "properties": {
-        "accountType": "[parameters('storageAccountType')]"
+        "supportsHttpsTrafficOnly": true
       }
     },
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[concat(parameters('storageAccountNamePrefix'),'3')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-09-01",
       "location": "[parameters('location')]",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "StorageV2",
       "properties": {
-        "accountType": "Standard_LRS"
+        "supportsHttpsTrafficOnly": true
       }
     }
   ]

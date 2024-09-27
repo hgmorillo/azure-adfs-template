@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "location": {
@@ -155,14 +155,14 @@
       "metadata": {
         "description": "The vm size of the Domain Controllers"
       },
-      "defaultValue": "Standard_DS2_V2"
+      "defaultValue": "Standard_DS2_v2"
     },
     "adfsVMsSize": {
       "type": "string",
       "metadata": {
         "description": "The vm size of the ADFS servers"
       },
-      "defaultValue": "Standard_DS2_V2"
+      "defaultValue": "Standard_DS2_v2"
     },
     "wapVMsSize": {
       "type": "string",
@@ -187,7 +187,7 @@
     }
   },
   "variables": {
-    "baseUrl": "https://raw.githubusercontent.com/paulomarquesc/adfs-6vms-regular-template-based/master/",
+    "baseUrl": "https://raw.githubusercontent.com/hgmorillo/azure-adfs-template/refs/heads/main/",
     "storageAccountNamePrefix": "[concat(uniquestring(resourceGroup().id),'sa')]",
     "deployStorageAccountsUrl": "[concat(variables('baseUrl'),'/deployStorageAccounts.json')]",
     "deployPublicIPsUrl": "[concat(variables('baseUrl'),'/deployPublicIPs.json')]",
@@ -232,7 +232,7 @@
       "rdpWap02"
     ],
     "lbPublicIpResourceIds": [
-      "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),variables('publicIpName'))]"
+      "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName'))]"
     ],
     "deployNicsUrl": "[concat(variables('baseUrl'),'/deployNics.json')]",
     "deployNsgsUrl": "[concat(variables('baseUrl'),'/deployNsgs.json')]",
@@ -242,7 +242,7 @@
     {
       "name": "storageAccountDeployment",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2019-10-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -265,7 +265,7 @@
     {
       "name": "publicIpAddressesDeployment",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2019-10-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -288,7 +288,7 @@
     {
       "name": "availabilitySetsDeployment",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2019-10-01",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -306,9 +306,32 @@
       }
     },
     {
+      "name": "nsgDeployment",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2019-10-01",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('deployNsgsUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "dmzSubnetAddressRange": {
+            "value": "[parameters('dmzSubnetAddressRange')]"
+          },
+          "internalSubnetAddressRange": {
+            "value": "[parameters('internalSubnetAddressRange')]"
+          }
+        }
+      }
+    },
+    {
       "name": "virtualNetworkDeployment",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2019-10-01",
       "dependsOn": [
         "Microsoft.Resources/deployments/nsgDeployment"
       ],
@@ -340,7 +363,7 @@
     {
       "name": "loadBalancerDeployment",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2019-10-01",
       "dependsOn": [
         "Microsoft.Resources/deployments/virtualNetworkDeployment",
         "Microsoft.Resources/deployments/publicIpAddressesDeployment"
@@ -385,7 +408,7 @@
     {
       "name": "nicsDeployment",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2019-10-01",
       "dependsOn": [
         "Microsoft.Resources/deployments/virtualNetworkDeployment",
         "Microsoft.Resources/deployments/loadBalancerDeployment",
@@ -443,32 +466,9 @@
       }
     },
     {
-      "name": "nsgDeployment",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('deployNsgsUrl')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "location": {
-            "value": "[parameters('location')]"
-          },
-          "dmzSubnetAddressRange": {
-            "value": "[parameters('dmzSubnetAddressRange')]"
-          },
-          "internalSubnetAddressRange": {
-            "value": "[parameters('internalSubnetAddressRange')]"
-          }
-        }
-      }
-    },
-    {
       "name": "addcVmsDeployment",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2019-10-01",
       "dependsOn": [
         "Microsoft.Resources/deployments/nicsDeployment"
       ],
@@ -509,7 +509,7 @@
     {
       "name": "adfsVmsDeployment",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2019-10-01",
       "dependsOn": [
         "Microsoft.Resources/deployments/nicsDeployment"
       ],
@@ -550,7 +550,7 @@
     {
       "name": "wapVmsDeployment",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2019-10-01",
       "dependsOn": [
         "Microsoft.Resources/deployments/nicsDeployment"
       ],

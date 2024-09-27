@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "location": {
@@ -13,9 +13,6 @@
     },
     "subnets": {
       "type": "array"
-    },
-    "resourceGroupName":{
-      "type": "string"
     }
   },
   "resources": [
@@ -23,7 +20,7 @@
       "name": "[parameters('virtualNetworkName')]",
       "type": "Microsoft.Network/virtualNetworks",
       "location": "[parameters('location')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2021-02-01",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
@@ -36,7 +33,7 @@
   ],
   "outputs": {
     "vnetId": {
-      "value": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
+      "value": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
       "type": "string"
     }
   }
