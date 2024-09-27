@@ -184,11 +184,17 @@
       "metadata": {
         "description": "The password for the local Administrator account of the virtual machines"
       }
+    },
+    "resourceGroupName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the resource group where the resources are deployed."
+      }
     }
   },
   "variables": {
     "baseUrl": "https://raw.githubusercontent.com/hgmorillo/azure-adfs-template/refs/heads/main/",
-    "storageAccountNamePrefix": "[concat(uniquestring(resourceGroup().id),'sa')]",
+    "storageAccountNamePrefix": "[concat(uniquestring(parameters('resourceGroupName')),'sa')]",
     "deployStorageAccountsUrl": "[concat(variables('baseUrl'),'/deployStorageAccounts.json')]",
     "deployPublicIPsUrl": "[concat(variables('baseUrl'),'/deployPublicIPs.json')]",
     "publicIpName": "wapLbPip",
