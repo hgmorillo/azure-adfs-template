@@ -33,6 +33,9 @@
       "apiVersion": "2021-02-01",
       "name": "[parameters('loadBalancerNames')[0]]",
       "type": "Microsoft.Network/loadBalancers",
+      "sku": {
+        "name": "Standard"
+      },
       "location": "[parameters('location')]",
       "properties": {
         "frontendIPConfigurations": [
@@ -92,6 +95,9 @@
       "apiVersion": "2021-02-01",
       "name": "[parameters('loadBalancerNames')[1]]",
       "type": "Microsoft.Network/loadBalancers",
+      "sku": {
+        "name": "Standard"
+      },
       "location": "[parameters('location')]",
       "properties": {
         "frontendIPConfigurations": [
